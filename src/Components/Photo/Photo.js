@@ -1,4 +1,4 @@
-import "./photoStyle.css";
+import "./Photo.css";
 
 const Photo = (props) => {
   const { imgSrc } = props;
