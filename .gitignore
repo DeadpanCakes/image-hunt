@@ -10,6 +10,7 @@
 
 # production
 /build
+/tempAssets
 
 # misc
 .DS_Store
