@@ -14,6 +14,7 @@ const Dropdown = (props) => {
       {targets.map((target) => {
         return (
           <DropdownSelection
+            key={target.name}
             target={target}
             targetBox={{ origin: coords, size: 50 }}
           />
