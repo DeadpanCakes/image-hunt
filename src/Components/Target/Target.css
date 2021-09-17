@@ -1,0 +1,8 @@
+.target {
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: 1px solid black;
+    border-left-color: white;
+    border-bottom-color: white;
+}
