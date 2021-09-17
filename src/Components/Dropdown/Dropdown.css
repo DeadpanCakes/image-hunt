@@ -1,0 +1,4 @@
+.dropDown {
+    display: flex;
+    flex-direction: column;
+}
