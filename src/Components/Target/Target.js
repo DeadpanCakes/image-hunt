@@ -1,7 +1,13 @@
-import './Target.css';
+import "./Target.css";
 
-const Target = () => {
-    return <div className="target"></div>
-}
+const Target = (props) => {
+  const { coords } = props;
+  const style = {
+    position: "absolute",
+    left: coords.x - 25,
+    top: coords.y - 25,
+  };
+  return <div className="target" style={style}></div>;
+};
 
-export default Target
+export default Target;
