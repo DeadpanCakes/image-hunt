@@ -27,7 +27,9 @@ const Photo = (props) => {
       className="photo"
       style={photoStyle}
       onClick={(e) => {
-        handleClick({ x: e.pageX, y: e.pageY });
+        if (e.target.className === "photo") {
+          handleClick({ x: e.pageX, y: e.pageY });
+        }
       }}
     >
       {lastClickCoords ? <Target coords={lastClickCoords} /> : null};
