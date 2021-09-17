@@ -4,7 +4,7 @@ import Target from "../Target/Target";
 import Dropdown from "../Dropdown/Dropdown";
 
 const Photo = (props) => {
-  const { imgSrc, imgWidth, imgHeight } = props;
+  const { imgSrc, imgWidth, imgHeight, targetPool } = props;
   const [lastClickCoords, setLastClickCoords] = useState(null);
 
   const photoStyle = {
@@ -33,7 +33,10 @@ const Photo = (props) => {
       }}
     >
       {lastClickCoords ? <Target coords={lastClickCoords} /> : null};
-      {lastClickCoords ? <Dropdown coords={lastClickCoords} /> : null};
+      {lastClickCoords ? (
+        <Dropdown coords={lastClickCoords} targets={targetPool} />
+      ) : null}
+      ;
     </div>
   );
 };
