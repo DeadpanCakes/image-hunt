@@ -1,4 +1,4 @@
-import './targetStyle.css';
+import './Target.css';
 
 const Target = () => {
     return <div className="target"></div>
