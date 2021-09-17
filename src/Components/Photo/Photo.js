@@ -1,7 +1,9 @@
-import './photoStyle.css';
+import "./photoStyle.css";
 
-const Photo = () => {
-  return <div class="photo"></div>;
+const Photo = (props) => {
+  const { imgSrc } = props;
+  const photoStyle = { backgroundImage: `url(${imgSrc})`};
+  return <div className="photo" style={photoStyle}></div>;
 };
 
 export default Photo;
