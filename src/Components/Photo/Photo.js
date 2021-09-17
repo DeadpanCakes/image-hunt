@@ -14,7 +14,12 @@ const Photo = (props) => {
   };
 
   const handleClick = (coords) => {
-    setLastClickCoords(coords);
+    setLastClickCoords((lastCoords) => {
+      if (!lastCoords) {
+        return coords;
+      }
+      return null;
+    });
   };
 
   return (
