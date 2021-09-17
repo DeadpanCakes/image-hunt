@@ -1,10 +1,11 @@
 import "./Photo.css";
 import { useState } from "react";
 import Target from "../Target/Target";
+import Dropdown from "../Dropdown/Dropdown";
 
 const Photo = (props) => {
   const { imgSrc, imgWidth, imgHeight } = props;
-  const [targetPosition, setTargetPosition] = useState(null);
+  const [lastClickCoords, setLastClickCoords] = useState(null);
 
   const photoStyle = {
     backgroundImage: `url(${imgSrc})`,
@@ -13,7 +14,7 @@ const Photo = (props) => {
   };
 
   const handleClick = (coords) => {
-    setTargetPosition(coords);
+    setLastClickCoords(coords);
   };
 
   return (
@@ -24,7 +25,8 @@ const Photo = (props) => {
         handleClick({ x: e.pageX, y: e.pageY });
       }}
     >
-      {targetPosition ? <Target coords={targetPosition} /> : null}
+      {lastClickCoords ? <Target coords={lastClickCoords} /> : null};
+      {lastClickCoords ? <Dropdown coords={lastClickCoords} /> : null};
     </div>
   );
 };
