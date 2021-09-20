@@ -1,24 +1,14 @@
 import "./App.css";
-import Photo from "./Components/Photo/Photo";
-import targetPool from "./testFns/tmpTarget/leftTmpTarget";
-import panelImgs from "./Assets/panels";
 import Game from "./Components/Game/Game";
-import Header from "./Components/Header/Header";
+import MainMenu from "./Components/MainMenu/MainMenu";
+import { useState } from "react";
 
 function App() {
+  const [chosenPanel, setChosenPanel] = useState(null);
   return (
     <div className="App">
-      {
-        <Game>
-          <Header />
-          <Photo
-            imgSrc={panelImgs.left}
-            imgWidth={1800}
-            imgHeight={4300}
-            targetPool={targetPool}
-          />
-        </Game>
-      }
+      {chosenPanel ? <Game panel={chosenPanel} /> : null}
+      {!chosenPanel ? <MainMenu choosePanel={setChosenPanel} /> : null}
     </div>
   );
 }
