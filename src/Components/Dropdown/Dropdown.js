@@ -8,7 +8,6 @@ const Dropdown = (props) => {
     left: coords.x - 25,
     top: coords.y + 50,
   };
-  console.log(targets);
   return (
     <div style={style} className="dropDown">
       {targets.map((target) => {
