@@ -9,7 +9,7 @@ const Photo = (props) => {
 
   const photoStyle = {
     backgroundImage: `url(${imgSrc})`,
-    width: imgWidth,
+    minWidth: imgWidth,
     height: imgHeight,
   };
 
