@@ -2,7 +2,7 @@ import "./Dropdown.css";
 import DropdownSelection from "./DropdownSelection";
 
 const Dropdown = (props) => {
-  const { coords, targets, findTarget } = props;
+  const { coords, targets, findTarget, markPin } = props;
   const style = {
     position: "absolute",
     left: coords.x - 25,
@@ -17,6 +17,7 @@ const Dropdown = (props) => {
             target={target}
             targetBox={{ origin: coords, size: 50 }}
             findTarget={findTarget}
+            markPin={markPin}
           />
         );
       })}

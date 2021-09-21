@@ -22,6 +22,10 @@ const Game = (props) => {
       return prevState;
     });
   };
+  const [pinsMarked, setPinsMarked] = useState([]);
+  const markPin = (pin) => {
+    setPinsMarked((prevState) => prevState.concat(pin));
+  };
 
   useEffect(() => {
     const fetchTargets = async () => {
@@ -100,6 +104,8 @@ const Game = (props) => {
         imgHeight={panelImg.dimensions.y}
         targetPool={targetPool}
         findTarget={findTarget}
+        pinsMarked={pinsMarked}
+        markPin={markPin}
       />
     </div>
   );
