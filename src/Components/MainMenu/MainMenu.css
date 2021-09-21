@@ -1,3 +1,8 @@
+h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 50px;
+}
+
 .mainMenu {
   color: white;
   display: flex;
