@@ -8,12 +8,21 @@ import panelImgs from "../../Assets/panels";
 const Game = (props) => {
   const { panel } = props;
   const { left, center, right } = panelImgs;
-
   const [targetPool, setTargetPool] = useState(null);
   const [panelImg, setPanelImg] = useState({
     imgSrc: center,
     dimensions: { x: 4080, y: 4300 },
   });
+  const [targetsFound, setTargetsFound] = useState([]);
+  const findTarget = (target) => {
+    setTargetsFound((prevState) => {
+      if (!prevState.includes(target)) {
+        return prevState.concat(target);
+      }
+      return prevState;
+    });
+  };
+
   useEffect(() => {
     const fetchTargets = async () => {
       try {
@@ -24,7 +33,7 @@ const Game = (props) => {
             const leftQuery = query(collection(db, "leftTargetPool"));
             const leftSnapshot = await getDocs(leftQuery);
             leftSnapshot.forEach((doc) => {
-              targets.push(doc.data());
+              targets.push({ ...doc.data(), id: doc.id });
             });
             setTargetPool(targets);
             break;
@@ -32,7 +41,7 @@ const Game = (props) => {
             const centerQuery = query(collection(db, "centerTargetPool"));
             const centerSnapshot = await getDocs(centerQuery);
             centerSnapshot.forEach((doc) => {
-              targets.push(doc.data());
+              targets.push({ ...doc.data(), id: doc.id });
             });
             setTargetPool(targets);
             break;
@@ -40,7 +49,7 @@ const Game = (props) => {
             const rightQuery = query(collection(db, "rightTargetPool"));
             const rightSnapshot = await getDocs(rightQuery);
             rightSnapshot.forEach((doc) => {
-              targets.push(doc.data());
+              targets.push({ ...doc.data(), id: doc.id });
             });
             setTargetPool(targets);
             break;
@@ -67,6 +76,21 @@ const Game = (props) => {
     determineImg();
   }, [left, center, right, panel]);
 
+  useEffect(() => {
+    if (targetPool) {
+      const areAllTargetsFound = () => {
+        const targetIDs = targetPool.map((target) => target.id);
+        return targetIDs.every((targetID) => {
+          return targetsFound.includes(targetID);
+        });
+      };
+
+      if (areAllTargetsFound()) {
+        console.log("game over");
+      }
+    }
+  }, [targetPool, targetsFound]);
+
   return (
     <div className="game">
       <Header />
@@ -75,6 +99,7 @@ const Game = (props) => {
         imgWidth={panelImg.dimensions.x}
         imgHeight={panelImg.dimensions.y}
         targetPool={targetPool}
+        findTarget={findTarget}
       />
     </div>
   );

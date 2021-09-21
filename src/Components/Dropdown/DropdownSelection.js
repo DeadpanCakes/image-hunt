@@ -1,5 +1,5 @@
 const DropdownSelection = (props) => {
-  const { target, targetBox } = props;
+  const { findTarget, target, targetBox } = props;
   const { position } = target;
   const checkIfTargeted = (coords) => {
     const topLeft = {
@@ -33,7 +33,7 @@ const DropdownSelection = (props) => {
   };
 
   const handleClick = () => {
-    console.log(doBoxesOverlap(targetBox.origin, targetBox.size));
+    findTarget(target.id);
   };
   return <button onClick={handleClick}>{target.desc}</button>;
 };
