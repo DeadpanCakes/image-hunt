@@ -12,18 +12,33 @@ const LevelSelect = () => {
   return (
     <div className="levelSelect" style={style}>
       <Link to="/game/left" className="leftPanel levelOption">
-        <div>
+        <div className="levelContents">
           <h2>Left</h2>
+          <ul>
+            <li>A fallen fruit</li>
+            <li>An owl</li>
+            <li>A reading...platypus?</li>
+          </ul>
         </div>
       </Link>
       <Link to="/game/center" className="centerPanel levelOption">
-        <div>
+        <div className="levelContents">
           <h2>Center</h2>
+          <ul>
+            <li>A mama bird, feeding her young</li>
+            <li>Catching a flying fish</li>
+            <li>Having a drink at the water fountain</li>
+          </ul>
         </div>
       </Link>
       <Link to="/game/right" className="rightPanel levelOption">
-        <div>
+        <div className="levelContents">
           <h2>Right</h2>
+          <ul>
+            <li>A perfectly-balanced egg</li>
+            <li>A plague doctor</li>
+            <li>A very bored individual</li>
+          </ul>
         </div>
       </Link>
     </div>

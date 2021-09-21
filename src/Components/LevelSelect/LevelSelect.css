@@ -1,3 +1,21 @@
+* {
+  font-family: "Josefin Slab", serif;
+  font-size: 30px;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+h2 {
+  font-size: 1.3em;
+  font-family: "Adamina", serif;
+}
+
 .levelSelect {
   display: flex;
   align-items: stretch;
@@ -5,15 +23,26 @@
 }
 
 .levelOption {
+  padding-top: 35px;
+  color: white;
   background-color: #000000d7;
   flex: 1;
 }
 
 .levelOption:hover {
   background-color: #00000069;
+  text-shadow: 1px 1px 15px #000000;
 }
 
 .centerPanel {
   width: 319;
   flex: 2;
+}
+
+.levelContents {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  padding: 20px;
+  padding-top: 35px;
 }
