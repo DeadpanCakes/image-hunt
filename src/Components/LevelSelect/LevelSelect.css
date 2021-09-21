@@ -1,3 +1,19 @@
 .levelSelect {
+  display: flex;
+  align-items: stretch;
   background-repeat: no-repeat;
+}
+
+.levelOption {
+  background-color: #000000d7;
+  flex: 1;
+}
+
+.levelOption:hover {
+  background-color: #00000069;
+}
+
+.centerPanel {
+  width: 319;
+  flex: 2;
 }
