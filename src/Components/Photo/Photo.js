@@ -32,11 +32,10 @@ const Photo = (props) => {
         }
       }}
     >
-      {lastClickCoords ? <Target coords={lastClickCoords} /> : null};
-      {lastClickCoords ? (
+      {lastClickCoords ? <Target coords={lastClickCoords} /> : null}
+      {lastClickCoords && targetPool ? (
         <Dropdown coords={lastClickCoords} targets={targetPool} />
       ) : null}
-      ;
     </div>
   );
 };
