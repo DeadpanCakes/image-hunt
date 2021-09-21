@@ -1,7 +1,7 @@
 import "./MainMenu.css";
 import LevelSelect from "../LevelSelect/LevelSelect";
 
-const MainMenu = (props) => {
+const MainMenu = () => {
   return (
     <div className="mainMenu">
       <h1>Garden of Earthly Delights</h1>
