@@ -1,14 +1,27 @@
 import "./App.css";
 import Game from "./Components/Game/Game";
 import MainMenu from "./Components/MainMenu/MainMenu";
-import { useState } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
-  const [chosenPanel, setChosenPanel] = useState(null);
   return (
     <div className="App">
-      {chosenPanel ? <Game panel={chosenPanel} /> : null}
-      {!chosenPanel ? <MainMenu choosePanel={setChosenPanel} /> : null}
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <MainMenu />
+          </Route>
+          <Route path="/game/left">
+            <Game panel="left" />
+          </Route>
+          <Route path="/game/right">
+            <Game panel="right" />
+          </Route>
+          <Route path="/game/center">
+            <Game panel="center" />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
