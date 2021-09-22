@@ -3,9 +3,11 @@ import { useState, useEffect } from "react";
 const Timer = () => {
   const [currentTime, setCurrentTime] = useState(0);
   useEffect(() => {
-    setInterval(() => {
+    const countSecond = () => {
       setCurrentTime((currTime) => currTime + 1);
-    }, 1000);
+    };
+    setInterval(countSecond, 1000);
+    return () => clearInterval(countSecond);
   }, []);
   const convertTime = (seconds) => {
     let hours;
