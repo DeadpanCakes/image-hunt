@@ -17,14 +17,9 @@ const Pin = (props) => {
         <FontAwesomeIcon
           icon={isCorrect ? faMapPin : faTimes}
           className={isCorrect ? "pin correct" : "pin incorrect"}
-          style={{ color: isCorrect ? "white" : "red" }}
         />
         <p
-          className="name"
-          style={{
-            textDecoration: isCorrect ? "none" : "line-through",
-            color: isCorrect ? "white" : "red",
-          }}
+          className={isCorrect ? "name correct" : "name incorrect"}
         >
           {name}
         </p>

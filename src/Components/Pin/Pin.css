@@ -1,6 +1,5 @@
 .pinContainer {
   position: absolute;
-  text-shadow: 2px 2px 20px white;
 }
 
 .iconContainer {
@@ -9,8 +8,26 @@
 
 .name {
   position: absolute;
+  text-shadow: 2px 2px 15px white;
 }
 
-.incorrect {
+.name.correct {
+  color: white;
+}
+
+.name.incorrect {
   color: red;
+  text-decoration: line-through;
+}
+
+.pin.correct {
+  color: white;
+}
+
+.pin.incorrect {
+  color: red;
+}
+
+.pin {
+  filter: drop-shadow(2px 2px 10px white);
 }
