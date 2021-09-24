@@ -1,5 +1,6 @@
 .pinContainer {
   position: absolute;
+  pointer-events: none;
 }
 
 .iconContainer {
