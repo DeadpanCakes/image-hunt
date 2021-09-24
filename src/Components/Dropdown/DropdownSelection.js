@@ -1,7 +1,7 @@
 import { v4 as uuid } from "uuid";
 
 const DropdownSelection = (props) => {
-  const { findTarget, markPin, target, targetBox } = props;
+  const { clearCoords, findTarget, markPin, target, targetBox } = props;
   const { position } = target;
   const checkIfTargeted = (coords) => {
     const topLeft = {
@@ -35,12 +35,17 @@ const DropdownSelection = (props) => {
   };
 
   const handleClick = () => {
-    let isCorrect
-    if (doBoxesOverlap({x: targetBox.origin.x, y: targetBox.origin.y}, targetBox.size)) {
+    let isCorrect;
+    if (
+      doBoxesOverlap(
+        { x: targetBox.origin.x, y: targetBox.origin.y },
+        targetBox.size
+      )
+    ) {
       findTarget(target.id);
-      isCorrect = true
+      isCorrect = true;
     } else {
-      isCorrect = false
+      isCorrect = false;
     }
     const newPin = {
       id: uuid(),
@@ -49,6 +54,7 @@ const DropdownSelection = (props) => {
       isCorrect: isCorrect,
     };
     markPin(newPin);
+    clearCoords();
   };
   return <button onClick={handleClick}>{target.desc}</button>;
 };
