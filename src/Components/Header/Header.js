@@ -3,7 +3,7 @@ import TargetListing from "./TargetListing";
 import Timer from "./Timer";
 
 const Header = (props) => {
-  const { targetsFound, targetPool } = props;
+  const { targetsFound, targetPool, isGameOver } = props;
   return (
     <header>
       <ul className="targetList">
@@ -19,7 +19,7 @@ const Header = (props) => {
             })
           : null}
       </ul>
-      <Timer />
+      <Timer isGameOver={isGameOver} />
     </header>
   );
 };

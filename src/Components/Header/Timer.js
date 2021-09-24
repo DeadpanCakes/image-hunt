@@ -1,14 +1,20 @@
 import { useState, useEffect } from "react";
 
-const Timer = () => {
+const Timer = (props) => {
+  const { isGameOver } = props;
   const [currentTime, setCurrentTime] = useState(0);
+  const countSecond = () => {
+    setCurrentTime((currTime) => currTime + 1);
+  };
+
   useEffect(() => {
-    const countSecond = () => {
-      setCurrentTime((currTime) => currTime + 1);
-    };
-    setInterval(countSecond, 1000);
-    return () => clearInterval(countSecond);
-  }, []);
+    const timer = setInterval(countSecond, 1000);
+    if (isGameOver) {
+      clearInterval(timer);
+    }
+    return () => clearInterval(timer);
+  }, [isGameOver]);
+
   const convertTime = (seconds) => {
     let hours;
     let minutes;

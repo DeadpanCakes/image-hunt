@@ -26,6 +26,7 @@ const Game = (props) => {
   const markPin = (pin) => {
     setPinsMarked((prevState) => prevState.concat(pin));
   };
+  const [isGameOver, setGameOver] = useState(false);
 
   useEffect(() => {
     const fetchTargets = async () => {
@@ -90,14 +91,23 @@ const Game = (props) => {
       };
 
       if (areAllTargetsFound()) {
-        console.log("game over");
+        setGameOver(true);
       }
     }
   }, [targetPool, targetsFound]);
 
+  useEffect(() => {
+    if (isGameOver) {
+    }
+  }, [isGameOver]);
+
   return (
     <div className="game">
-      <Header targetPool={targetPool} targetsFound={targetsFound}/>
+      <Header
+        targetPool={targetPool}
+        targetsFound={targetsFound}
+        isGameOver={isGameOver}
+      />
       <Photo
         imgSrc={panelImg.imgSrc}
         imgWidth={panelImg.dimensions.x}
