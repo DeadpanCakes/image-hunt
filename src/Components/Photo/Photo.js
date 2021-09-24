@@ -22,6 +22,10 @@ const Photo = (props) => {
     height: imgHeight,
   };
 
+  const clearCoords = () => {
+    setLastClickCoords(null);
+  };
+
   const handleClick = (coords) => {
     setLastClickCoords((lastCoords) => {
       if (!lastCoords) {
@@ -48,6 +52,7 @@ const Photo = (props) => {
           targets={targetPool}
           findTarget={findTarget}
           markPin={markPin}
+          clearCoords={clearCoords}
         />
       ) : null}
       <div className="pinsContainer">
