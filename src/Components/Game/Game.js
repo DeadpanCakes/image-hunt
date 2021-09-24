@@ -97,7 +97,7 @@ const Game = (props) => {
 
   return (
     <div className="game">
-      <Header />
+      <Header targetPool={targetPool} targetsFound={targetsFound}/>
       <Photo
         imgSrc={panelImg.imgSrc}
         imgWidth={panelImg.dimensions.x}
