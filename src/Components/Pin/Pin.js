@@ -1,6 +1,6 @@
 import "./Pin.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMapPin } from "@fortawesome/free-solid-svg-icons";
+import { faMapPin, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const Pin = (props) => {
   const { name, position, isCorrect } = props;
@@ -14,10 +14,17 @@ const Pin = (props) => {
       }}
     >
       <div className="iconContainer">
-        <FontAwesomeIcon icon={faMapPin} className="pin" />
+        <FontAwesomeIcon
+          icon={isCorrect ? faMapPin : faTimes}
+          className={isCorrect ? "pin correct" : "pin incorrect"}
+          style={{ color: isCorrect ? "white" : "red" }}
+        />
         <p
           className="name"
-          style={{ textDecoration: isCorrect ? "none" : "line-through" }}
+          style={{
+            textDecoration: isCorrect ? "none" : "line-through",
+            color: isCorrect ? "white" : "red",
+          }}
         >
           {name}
         </p>
