@@ -1,15 +1,12 @@
-* {
-  color: white;
-  font-weight: bold;
-  text-shadow: 2px 2px 10px white;
-}
-
 header {
   position: fixed;
   display: flex;
   justify-content: space-between;
   flex: 1;
   width: 100%;
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 2px 10px white;
 }
 
 .targetList {
