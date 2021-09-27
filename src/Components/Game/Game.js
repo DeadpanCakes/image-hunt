@@ -1,13 +1,25 @@
 import "./Game.css";
 import { useEffect, useState } from "react";
-import { collection, getFirestore, getDocs, query } from "firebase/firestore";
+import {
+  deleteDoc,
+  collection,
+  getFirestore,
+  getDoc,
+  getDocs,
+  query,
+  addDoc,
+} from "firebase/firestore";
 import Header from "../Header/Header";
 import Photo from "../Photo/Photo";
 import panelImgs from "../../Assets/panels";
+import Popup from "../Popup/Popup";
+import Leaderboard from "../Leaderboard/Leaderboard";
+import formatTime from "../../testFns/formatTime.js/formatTime";
 
 const Game = (props) => {
   const { panel } = props;
   const { left, center, right } = panelImgs;
+  const [timestamp, setTimestamp] = useState(null);
   const [targetPool, setTargetPool] = useState(null);
   const [panelImg, setPanelImg] = useState({
     imgSrc: center,
@@ -82,6 +94,23 @@ const Game = (props) => {
   }, [left, center, right, panel]);
 
   useEffect(() => {
+    //Only start timer once targets have been fetched
+    if (targetPool) {
+      const uploadTime = async () => {
+        const timestamp = Date();
+        const timestampRef = await addDoc(
+          collection(getFirestore(), "timestamp"),
+          {
+            startTime: timestamp,
+          }
+        );
+        setTimestamp(timestampRef);
+      };
+      uploadTime();
+    }
+  }, [targetPool]);
+
+  useEffect(() => {
     if (targetPool) {
       const areAllTargetsFound = () => {
         const targetIDs = targetPool.map((target) => target.id);
@@ -96,10 +125,22 @@ const Game = (props) => {
     }
   }, [targetPool, targetsFound]);
 
+  const [totalTime, setTotalTime] = useState(null);
+
   useEffect(() => {
-    if (isGameOver) {
+    if (isGameOver && timestamp) {
+      const findDuration = async () => {
+        const endTime = new Date();
+        const startTimeSnap = await getDoc(timestamp);
+        const startTime = new Date(startTimeSnap.data().startTime);
+        deleteDoc(timestamp);
+        const duration = Math.floor((endTime - startTime) / 1000);
+        const formattedDuration = formatTime(duration);
+        setTotalTime(formattedDuration);
+      };
+      findDuration();
     }
-  }, [isGameOver]);
+  }, [timestamp, isGameOver]);
 
   return (
     <div className="game">
@@ -117,6 +158,13 @@ const Game = (props) => {
         pinsMarked={pinsMarked}
         markPin={markPin}
       />
+      {isGameOver && totalTime ? (
+        <Popup>
+          <h2>Congrats</h2>
+          <p>Your total time was {totalTime}</p>
+          <Leaderboard panel={panel} count={3} />
+        </Popup>
+      ) : null}
     </div>
   );
 };
