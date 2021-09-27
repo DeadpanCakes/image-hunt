@@ -1,0 +1,18 @@
+.popup {
+  position: fixed;
+  width: 30vw;
+  min-height: 30vh;
+  top: 30%;
+  color: black;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.closeBtn {
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+}
