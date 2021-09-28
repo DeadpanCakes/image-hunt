@@ -15,9 +15,12 @@ import panelImgs from "../../Assets/panels";
 import Popup from "../Popup/Popup";
 import Leaderboard from "../Leaderboard/Leaderboard";
 import formatTime from "../../testFns/formatTime.js/formatTime";
+import { useHistory } from "react-router";
+import ScoreForm from "../ScoreForm/ScoreForm";
 
 const Game = (props) => {
   const { panel } = props;
+  const history = useHistory();
   const { left, center, right } = panelImgs;
   const [timestamp, setTimestamp] = useState(null);
   const [targetPool, setTargetPool] = useState(null);
@@ -135,12 +138,13 @@ const Game = (props) => {
         const startTime = new Date(startTimeSnap.data().startTime);
         deleteDoc(timestamp);
         const duration = Math.floor((endTime - startTime) / 1000);
-        const formattedDuration = formatTime(duration);
-        setTotalTime(formattedDuration);
+        setTotalTime(duration);
       };
       findDuration();
     }
   }, [timestamp, isGameOver]);
+
+  const [submittingTime, setSubmittingTime] = useState(false);
 
   return (
     <div className="game">
@@ -161,8 +165,28 @@ const Game = (props) => {
       {isGameOver && totalTime ? (
         <Popup>
           <h2>Congrats</h2>
-          <p>Your total time was {totalTime}</p>
+          <p>Your time was {formatTime(totalTime)}</p>
+          <form>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setSubmittingTime(true);
+              }}
+            >
+              Submit Time
+            </button>
+            <button onClick={() => history.push("/")}>Home</button>
+          </form>
           <Leaderboard panel={panel} count={3} />
+          {submittingTime ? (
+            <Popup closeFn={() => setSubmittingTime(false)}>
+              <ScoreForm
+                closeFn={() => setSubmittingTime(false)}
+                panel={panel}
+                time={totalTime}
+              />
+            </Popup>
+          ) : null}
         </Popup>
       ) : null}
     </div>
