@@ -18,7 +18,7 @@ const Leaderboard = (props) => {
       const scoreQuery = query(
         collection(getFirestore(), `${panel}LeaderBoard`),
         orderBy("time", "asc"),
-        limit(count)
+        limit(count ? count : 5)
       );
       const scoreSnap = await getDocs(scoreQuery);
       const scoreArr = [];
