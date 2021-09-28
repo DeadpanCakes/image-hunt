@@ -9,3 +9,29 @@ h1 {
   flex-direction: column;
   align-items: center;
 }
+
+.leaderboardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.panelTabContainer {
+  display: flex;
+}
+
+.panelTab {
+  font-size: 20px;
+  border-radius: 0;
+  border: 1px solid gray;
+}
+
+.panelTab:disabled,
+.panelTab:disabled:hover {
+  color: gray;
+  background-color: lightgray;
+}
+
+.panelTab:hover {
+  background-color: darkgray;
+}
