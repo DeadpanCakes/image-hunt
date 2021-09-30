@@ -1,0 +1,14 @@
+.scoreForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: space-around;
+  padding-top: 5%;
+}
+
+.btnContainer {
+    display: flex;
+    justify-content: space-around;
+    align-self: stretch;
+    margin-top: 20px;
+}

@@ -1,3 +1,4 @@
+import style from "./ScoreForm.module.css";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { addDoc, collection, getFirestore } from "@firebase/firestore";
@@ -20,29 +21,32 @@ const ScoreForm = (props) => {
     history.push("/");
   };
   return (
-    <form>
+    <form className={style.scoreForm}>
+      <h1>Enter Name</h1>
       <input
         value={name}
         onChange={(e) => {
           handleChange(e.target.value);
         }}
       ></input>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          handleSubmit();
-        }}
-      >
-        Submit
-      </button>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          closeFn();
-        }}
-      >
-        Cancel
-      </button>
+      <div className={style.btnContainer}>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+        >
+          Submit
+        </button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            closeFn();
+          }}
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   );
 };
