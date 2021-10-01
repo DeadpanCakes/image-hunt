@@ -12,9 +12,9 @@ const ScoreForm = (props) => {
     console.log(name);
   };
   const handleSubmit = async () => {
-    const data = { time, name };
+    const data = { time, name, panel };
     const newScoreRef = await addDoc(
-      collection(getFirestore(), `${panel}LeaderBoard`),
+      collection(getFirestore(), "scores"),
       data
     );
     console.log(`${newScoreRef} added to db`);
