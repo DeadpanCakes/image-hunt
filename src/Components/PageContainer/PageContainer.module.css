@@ -1,0 +1,11 @@
+.pageContainer {
+  display: "flex";
+  flex-direction: column;
+  align-items: center;
+}
+
+.pageNavContainer {
+  display: flex;
+  flex: 1;
+  justify-content: space-around;
+}
