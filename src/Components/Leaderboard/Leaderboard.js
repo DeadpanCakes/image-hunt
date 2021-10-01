@@ -1,49 +1,63 @@
 import style from "./Leaderboard.module.css";
 import LeaderListing from "./LeaderListing";
-import { useEffect, useState } from "react";
-import {
-  getDocs,
-  collection,
-  query,
-  getFirestore,
-  orderBy,
-  limit,
-} from "firebase/firestore";
+import useLeaderboard from "../../Hooks/useLeaderboard";
+import PageContainer from "../PageContainer/PageContainer";
+import { useState, useEffect } from "react";
 
 const Leaderboard = (props) => {
-  const { count, panel } = props;
-  const [scores, setScores] = useState(null);
-  useEffect(() => {
-    const fetchScores = async () => {
-      const scoreQuery = query(
-        collection(getFirestore(), `${panel}LeaderBoard`),
-        orderBy("time", "asc"),
-        limit(count ? count : 5)
-      );
-      const scoreSnap = await getDocs(scoreQuery);
-      const scoreArr = [];
-      scoreSnap.forEach((score) => {
-        scoreArr.push({ ...score.data(), id: score.id });
-      });
-      setScores(scoreArr);
-    };
-    fetchScores();
-  }, [count, panel]);
+  const { panel } = props;
+  const [pages, setPages] = useState([]);
+  const [currPage, setCurrPage] = useState(1);
+  const incrementPage = () => setCurrPage((prevPage) => prevPage + 1);
+  const decrementPage = () => setCurrPage((prevPage) => prevPage - 1);
+  const scores = useLeaderboard(panel);
 
+  useEffect(() => {
+    const divideIntoPages = () => {
+      let i = 0;
+      let j = 0;
+      const pages = [[]];
+      while (i < scores.length) {
+        while (j < 5 && i < scores.length) {
+          pages[pages.length - 1].push(scores[i]);
+          i++;
+          j++;
+        }
+        if (scores[i]) {
+          pages.push([]);
+        }
+        j = 0;
+      }
+      return pages;
+    };
+    if (scores) {
+      setPages(divideIntoPages());
+    }
+  }, [scores]);
+
+  console.log(pages[currPage - 1]);
   return (
-    <ul className={style.leaderboard}>
-      {scores
-        ? scores.map((score) => {
-            return (
-              <LeaderListing
-                key={score.id}
-                name={score.name}
-                time={score.time}
-              />
-            );
-          })
-        : null}
-    </ul>
+    <PageContainer
+      pages={pages}
+      currPage={currPage}
+      incrementPage={incrementPage}
+      decrementPage={decrementPage}
+      lastPage={pages.length}
+    >
+      <ul className={style.leaderboard}>
+        {pages[currPage - 1]
+          ? pages[currPage - 1].map((score) => {
+              return (
+                <LeaderListing
+                  key={score.id}
+                  name={score.name}
+                  time={score.time}
+                />
+              );
+            })
+          : null}
+      </ul>
+    </PageContainer>
   );
 };
 
