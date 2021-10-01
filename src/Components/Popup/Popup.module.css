@@ -2,7 +2,7 @@
   position: fixed;
   width: 30vw;
   min-height: 30vh;
-  top: 50%;
+  top: 40%;
   left: 50%;
   margin-top: -30vh;
   margin-left: -15vw;
@@ -10,6 +10,7 @@
   background-color: white;
   border-radius: 10px;
   box-shadow: 2px 2px 20px black;
+  padding: 10px;
 }
 
 .closeBtn {
