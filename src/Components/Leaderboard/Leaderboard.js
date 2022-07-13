@@ -3,6 +3,7 @@ import LeaderListing from "./LeaderListing";
 import useLeaderboard from "../../Hooks/useLeaderboard";
 import PageContainer from "../PageContainer/PageContainer";
 import { useState, useEffect } from "react";
+import ListingPlaceholder from "./ListingPlaceholder";
 
 const Leaderboard = (props) => {
   const { panel } = props;
@@ -34,6 +35,10 @@ const Leaderboard = (props) => {
       setPages(divideIntoPages());
     }
   }, [scores]);
+
+  useEffect(() => {
+    setCurrPage(1);
+  }, [panel]);
 
   console.log(pages[currPage - 1]);
   return (

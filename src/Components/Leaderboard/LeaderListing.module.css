@@ -2,3 +2,7 @@
   display: flex;
   justify-content: space-between;
 }
+
+.placeholder {
+  height: 91px;
+}
